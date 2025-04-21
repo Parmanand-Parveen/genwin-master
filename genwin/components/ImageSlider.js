@@ -33,7 +33,7 @@ const ImageSlider = ({ slides, autoPlay = true, autoPlayInterval = 3000 }) => {
   }, [isTransitioning, slides.length]);
 
   const prevSlide = useCallback(() => {
-    if (isTransitioning) return; // Prevent spamming navigation
+    if (isTransitioning) return; 
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
@@ -139,7 +139,7 @@ const ImageSlider = ({ slides, autoPlay = true, autoPlayInterval = 3000 }) => {
             <img
               src={isMobile ? slide.mobileImage : slide.image}
               alt={`Slide ${index + 1}`}
-              className={`w-full object-cover ${isMobile ? "mt-[500px] ml-[40px]" : ""}`}
+              className={`w-full object-cover ${isMobile ? "mt-[300px] ml-[20%]" : ""}`}
             />
           </picture>
         </div>

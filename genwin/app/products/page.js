@@ -123,7 +123,7 @@ export default function ProductsPage1() {
   const popImageSrc = useMemo(() => {
     let images = [];
     try {
-        images = selectedProduct.images;
+        images = selectedProduct?.images;
         return images?.[0]?.data
 
     } catch (error) {
