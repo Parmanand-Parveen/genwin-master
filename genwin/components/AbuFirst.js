@@ -106,7 +106,7 @@ export default function AbuFirst() {
           </div>
 
           {/* Second Column: Image/Video */}
-          <div className=" relative max-[768px]:bg-[url('/assets/images/bg-m.webp')] bg-cover bg-left pb-10">
+          <div className=" relative hidden md:block max-[768px]:bg-[url('/assets/images/bg-m.webp')] bg-cover bg-left pb-10">
             {/* Image */}
             <div className="z-[2] relative flex justify-center items-center">
               <Image
