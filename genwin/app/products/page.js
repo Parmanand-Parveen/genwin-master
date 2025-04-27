@@ -35,6 +35,7 @@ export default function ProductsPage1() {
       email: "",
       phone: "",
   })
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
       async function fetchCategories() {
@@ -69,25 +70,28 @@ export default function ProductsPage1() {
       }
   };
 
-
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("/api/admin/getallproducts", {
-          method: "GET", headers: { "Content-Type": "application/json" },
-        });
-        if (!response.ok) throw new Error(`Failed to fetch products: ${response.statusText}`);
-        const data = await response.json();
-        setAllProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-        setAllProducts([]);
-      }
-    };
-    fetchProducts();
-  }, []);
+  const fetchProducts = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("/api/admin/getallproducts", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!response.ok) throw new Error(`Failed to fetch products: ${response.statusText}`);
+      const data = await response.json();
+      setAllProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      setAllProducts([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  fetchProducts();
+}, []);
 
-  useEffect(() => {
+  useEffect(() => { 
     if (typeof window !== "undefined") {
       const handleResize = () => {
         setIsMobile(window.innerWidth < 1024);
@@ -182,8 +186,12 @@ export default function ProductsPage1() {
           </div>
 
           <div className="text-right text-sm lg:text-base text-gray-600 font-medium">
-            Showing {Math.min(visibleProductsCount, filteredProducts.length)} of {filteredProducts.length} Products
-          </div>
+  {isLoading ? (
+    <div className="h-4 bg-gray-200 rounded w-48 ml-auto animate-pulse"></div>
+  ) : (
+    `Showing ${Math.min(visibleProductsCount, filteredProducts.length)} of ${filteredProducts.length} Products`
+  )}
+</div>
 
            {filteredProducts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -266,9 +274,39 @@ export default function ProductsPage1() {
                     })}
                 </div>
             ) : (
-                 <div className="text-center py-10 text-gray-500">
-                    No products found matching your criteria.
-                 </div>
+              <div className="w-full">
+                {isLoading ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    {[...Array(6)].map((_, index) => (
+                      <div key={index} className="bg-white rounded-md border border-gray-200 animate-pulse">
+                        <div className="aspect-square bg-gray-200"></div>
+                        <div className="p-4">
+                          <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                          <div className="space-y-3">
+                            <div className="grid grid-cols-2 gap-2">
+                              {[...Array(4)].map((_, i) => (
+                                <div key={i} className="space-y-2">
+                                  <div className="h-3 bg-gray-200 rounded w-full"></div>
+                                  <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+                                </div>
+                              ))}
+                            </div>
+                            <div className="h-4 bg-gray-200 rounded w-1/4 mt-4"></div>
+                          </div>
+                        </div>
+                        <div className="p-4 border-t border-gray-200">
+                          <div className="h-10 bg-gray-200 rounded mb-2"></div>
+                          <div className="h-10 bg-gray-200 rounded"></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-10">
+                    <div className="text-gray-500">No products found</div>
+                  </div>
+                )}
+              </div>
             )}
 
           {filteredProducts.length > visibleProductsCount && (
