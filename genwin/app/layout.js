@@ -5,6 +5,7 @@ import '../styles/globals.css';
 import Navbar from '../components/Navbar'; // Import Navbar component
 import Footer from '../components/Footer'; // Import Footer component
 import WhatsAppLink from '@/components/WhatsApp';
+import favicon from '../public/assets/images/favicon.png';
 
 // Configure Google Fonts
 const montserrat = Montserrat({
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${montserrat.className}`}>
       <head>
+      <link rel="icon" href={favicon} sizes="any" />
       <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Genwin</title>
       </head>
