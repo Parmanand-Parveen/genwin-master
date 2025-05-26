@@ -10,7 +10,7 @@ import Testimonials from '../components/Testimonials';
 import BlockSlider from '@/components/BlockSlider';
 import p1 from '../public/assets/images/1.webp';
 import p2 from '../public/assets/images/2.webp';
-import p3 from '../public/assets/images/3.webp';
+import p3 from '../public/assets/images/clear3.png';
 import p4 from '../public/assets/images/4.webp';
 import p5 from '../public/assets/images/5.webp';
 import clientsThum from '../public/assets/images/clientThum.webp';
