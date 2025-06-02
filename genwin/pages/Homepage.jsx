@@ -52,8 +52,8 @@ export default function HomePage() {
       smallContentT: 'Satisfaction Work Rate',
     },
     {
-      image: '/assets/images/slide2.webp',
-      mobileImage: '/assets/images/slide2-vertical.webp', 
+      image: "/assets/images/clear3.png",
+      mobileImage: "/assets/images/clear3copy.png", 
       heading: 'Double Sided Tapes',
       content: 'Whether you’re bonding similar or completely different substrates, our double-sided tapes provide the strength, conformability, adhesion and aesthetic requirements you need to make your project successful.',
       ctaText: 'Ask a 3M Expert',
